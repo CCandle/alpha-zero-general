@@ -1,9 +1,9 @@
 import os
 import sys
 
-from tensorflow.keras import Input, Model
-from tensorflow.keras.layers import Conv2D, BatchNormalization, Activation, Dense, Dropout, Flatten, Reshape
-from tensorflow.keras.optimizers import Adam
+from keras import Input, Model
+from keras.layers import Conv2D, BatchNormalization, Activation, Dense, Dropout, Flatten, Reshape
+from keras.optimizers import Adam
 
 sys.path.append('../..')
 from rts.src.config import USE_TF_CPU, SHOW_TENSORFLOW_GPU

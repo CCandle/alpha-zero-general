@@ -1,6 +1,6 @@
-from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Activation, BatchNormalization, Dense, Dropout, Flatten, Input
-from tensorflow.keras.optimizers import Adam
+from keras.models import Model
+from keras.layers import Activation, BatchNormalization, Dense, Dropout, Flatten, Input
+from keras.optimizers import Adam
 
 
 class DotsAndBoxesNNet():

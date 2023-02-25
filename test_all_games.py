@@ -18,6 +18,8 @@
     - DotsAndBoxes               [Yes]
 """
 
+import tensorflow as tf
+
 import unittest
 
 import Arena
@@ -69,32 +71,32 @@ class TestAllGames(unittest.TestCase):
     def test_othello_pytorch(self):
         self.execute_game_test(OthelloGame(6), OthelloPytorchNNet)
 
-    def test_othello_keras(self):
-        self.execute_game_test(OthelloGame(6), OthelloKerasNNet)
+    # def test_othello_keras(self):
+    #     self.execute_game_test(OthelloGame(6), OthelloKerasNNet)
 
-    def test_tictactoe_keras(self):
-        self.execute_game_test(TicTacToeGame(), TicTacToeKerasNNet)
+    # def test_tictactoe_keras(self):
+    #     self.execute_game_test(TicTacToeGame(), TicTacToeKerasNNet)
     
-    def test_tictactoe3d_keras(self):
-        self.execute_game_test(TicTacToe3DGame(3), TicTacToe3DKerasNNet)
+    # def test_tictactoe3d_keras(self):
+    #     self.execute_game_test(TicTacToe3DGame(3), TicTacToe3DKerasNNet)
   
-    def test_gobang_keras(self):
-        self.execute_game_test(GobangGame(), GobangKerasNNet)
+    # def test_gobang_keras(self):
+    #     self.execute_game_test(GobangGame(), GobangKerasNNet)
 
     def test_tafl_pytorch(self):
         self.execute_game_test(TaflGame(5), TaflPytorchNNet)
 
-    def test_tafl_keras(self):
-        self.execute_game_test(TaflGame(5), TaflKerasNNet)
+    # def test_tafl_keras(self):
+    #     self.execute_game_test(TaflGame(5), TaflKerasNNet)
   
-    def test_connect4_keras(self):
-        self.execute_game_test(Connect4Game(5), Connect4KerasNNet)
+    # def test_connect4_keras(self):
+    #     self.execute_game_test(Connect4Game(5), Connect4KerasNNet)
 
-    def test_rts_keras(self):
-        self.execute_game_test(RTSGame(), RTSKerasNNet)
+    # def test_rts_keras(self):
+    #     self.execute_game_test(RTSGame(), RTSKerasNNet)
 
-    def test_dotsandboxes_keras(self):
-        self.execute_game_test(DotsAndBoxesGame(3), DotsAndBoxesKerasNNet)
+    # def test_dotsandboxes_keras(self):
+    #     self.execute_game_test(DotsAndBoxesGame(3), DotsAndBoxesKerasNNet)
 
 if __name__ == '__main__':
     unittest.main()

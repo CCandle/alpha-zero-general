@@ -1,9 +1,9 @@
+from .DotsAndBoxesLogic import Board
+from Game import Game
 import sys
 import numpy as np
 
 sys.path.append('..')
-from Game import Game
-from .DotsAndBoxesLogic import Board
 
 
 class DotsAndBoxesGame(Game):
@@ -93,7 +93,8 @@ class DotsAndBoxesGame(Game):
                 new_board.pieces[:self.n + 1, :self.n] = vertical
                 new_board.pieces[-self.n:, :] = horizontal
 
-                l += [(new_board.pieces, list(pi_vertical.ravel()) + list(pi_horizontal.ravel()) + [pi[-1]])]
+                l += [(new_board.pieces, list(pi_vertical.ravel()) +
+                       list(pi_horizontal.ravel()) + [pi[-1]])]
 
             aux = horizontal
             horizontal = vertical
@@ -106,7 +107,7 @@ class DotsAndBoxesGame(Game):
 
     def stringRepresentation(self, board):
         # 8x8 numpy array (canonical board)
-        return board.tostring()
+        return board.tobytes()
 
     @staticmethod
     def display(board):
@@ -122,5 +123,5 @@ class DotsAndBoxesGame(Game):
                     print(s, end="")
             print("")
 
-        print("Pass: {}".format(board[2,-1]))
+        print("Pass: {}".format(board[2, -1]))
         print("Score {} x {}".format(board[0, -1], board[1, -1]))

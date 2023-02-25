@@ -1,9 +1,10 @@
 from __future__ import print_function
+import numpy as np
+from .OthelloLogic import Board
+from Game import Game
 import sys
 sys.path.append('..')
-from Game import Game
-from .OthelloLogic import Board
-import numpy as np
+
 
 class OthelloGame(Game):
     square_content = {
@@ -39,7 +40,7 @@ class OthelloGame(Game):
             return (board, -player)
         b = Board(self.n)
         b.pieces = np.copy(board)
-        move = (int(action/self.n), action%self.n)
+        move = (int(action/self.n), action % self.n)
         b.execute_move(move, player)
         return (b.pieces, -player)
 
@@ -48,12 +49,12 @@ class OthelloGame(Game):
         valids = [0]*self.getActionSize()
         b = Board(self.n)
         b.pieces = np.copy(board)
-        legalMoves =  b.get_legal_moves(player)
-        if len(legalMoves)==0:
-            valids[-1]=1
+        legalMoves = b.get_legal_moves(player)
+        if len(legalMoves) == 0:
+            valids[-1] = 1
             return np.array(valids)
         for x, y in legalMoves:
-            valids[self.n*x+y]=1
+            valids[self.n*x+y] = 1
         return np.array(valids)
 
     def getGameEnded(self, board, player):
@@ -75,7 +76,7 @@ class OthelloGame(Game):
 
     def getSymmetries(self, board, pi):
         # mirror, rotational
-        assert(len(pi) == self.n**2+1)  # 1 for pass
+        assert (len(pi) == self.n**2+1)  # 1 for pass
         pi_board = np.reshape(pi[:-1], (self.n, self.n))
         l = []
 
@@ -90,10 +91,11 @@ class OthelloGame(Game):
         return l
 
     def stringRepresentation(self, board):
-        return board.tostring()
+        return board.tobytes()
 
     def stringRepresentationReadable(self, board):
-        board_s = "".join(self.square_content[square] for row in board for square in row)
+        board_s = "".join(self.square_content[square]
+                          for row in board for square in row)
         return board_s
 
     def getScore(self, board, player):

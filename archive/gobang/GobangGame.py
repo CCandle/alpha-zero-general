@@ -1,9 +1,9 @@
 from __future__ import print_function
+import numpy as np
+from .GobangLogic import Board
+from Game import Game
 import sys
 sys.path.append('..')
-from Game import Game
-from .GobangLogic import Board
-import numpy as np
 
 
 class GobangGame(Game):
@@ -82,7 +82,7 @@ class GobangGame(Game):
     # modified
     def getSymmetries(self, board, pi):
         # mirror, rotational
-        assert(len(pi) == self.n**2 + 1)  # 1 for pass
+        assert (len(pi) == self.n**2 + 1)  # 1 for pass
         pi_board = np.reshape(pi[:-1], (self.n, self.n))
         l = []
 
@@ -98,7 +98,7 @@ class GobangGame(Game):
 
     def stringRepresentation(self, board):
         # 8x8 numpy array (canonical board)
-        return board.tostring()
+        return board.tobytes()
 
     @staticmethod
     def display(board):

@@ -1,3 +1,5 @@
+from rts.src.config import NUM_ENCODERS, NUM_ACTS, P_NAME_IDX, A_TYPE_IDX, TIME_IDX, FPS
+from rts.src.Board import Board
 import sys
 from typing import Tuple
 
@@ -6,8 +8,6 @@ import numpy as np
 from rts.src.config_class import CONFIG
 
 sys.path.append('..')
-from rts.src.Board import Board
-from rts.src.config import NUM_ENCODERS, NUM_ACTS, P_NAME_IDX, A_TYPE_IDX, TIME_IDX, FPS
 
 """ USE_TIMEOUT, MAX_TIME, d_a_type, a_max_health, INITIAL_GOLD, TIMEOUT, visibility"""
 
@@ -41,7 +41,8 @@ class RTSGame:
         b = Board(self.n)
         remaining_time = None  # when setting initial board, remaining time might be different
         for e in self.initial_board_config:
-            b.pieces[e.x, e.y] = [e.player, e.a_type, e.health, e.carry, e.gold, e.timeout]
+            b.pieces[e.x, e.y] = [e.player, e.a_type,
+                                  e.health, e.carry, e.gold, e.timeout]
             remaining_time = e.timeout
         # remaining time is stored in all squares
         b.pieces[:, :, TIME_IDX] = remaining_time
@@ -65,7 +66,8 @@ class RTSGame:
         b = Board(self.n)
         b.pieces = np.copy(board)
 
-        y, x, action_index = np.unravel_index(action, [self.n, self.n, NUM_ACTS])
+        y, x, action_index = np.unravel_index(
+            action, [self.n, self.n, NUM_ACTS])
         move = (x, y, action_index)
 
         # first execute move, then run time function to destroy any actors if needed
@@ -99,7 +101,8 @@ class RTSGame:
 
         for y in range(self.n):
             for x in range(self.n):
-                if b[x][y][P_NAME_IDX] == player and b[x][y][A_TYPE_IDX] != 1:  # for this player and not Gold
+                # for this player and not Gold
+                if b[x][y][P_NAME_IDX] == player and b[x][y][A_TYPE_IDX] != 1:
                     valids.extend(b.get_moves_for_square(x, y, config=config))
                 else:
                     valids.extend([0] * NUM_ACTS)
@@ -191,7 +194,7 @@ class RTSGame:
         return return_list
 
     def stringRepresentation(self, board: np.ndarray):
-        return board.tostring()
+        return board.tobytes()
 
     def getScore(self, board: np.array, player: int):
         """
@@ -243,6 +246,7 @@ def display(board):
                     a_player = '-1'
                 if a_player == 0:
                     a_player = ' 0'
-                print("|" + a_player + " " + str(board[x][y][A_TYPE_IDX]) + " ", end="")
+                print("|" + a_player + " " +
+                      str(board[x][y][A_TYPE_IDX]) + " ", end="")
             print("|")
         print('-' * (n * 8 + 1))
